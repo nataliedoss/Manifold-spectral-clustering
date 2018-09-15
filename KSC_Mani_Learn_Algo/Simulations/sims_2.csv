@@ -1,0 +1,20 @@
+Algorithm,Circles,Curves,Lines
+SC,46.27,99.48,22.96
+Manifold + X,23.5,96.68,27.65
+Manifold + X Average,35.38,96.21,27.72
+Manifold + X Kernel,35.39,96.57,27.68
+Manifold Average + X,21.86,94.59,23.26
+Manifold Average + X Average,18.11,93.35,25.17
+Manifold Average + X Kernel,18.0,93.05,25.18
+Manifold Kernel + X,22.56,94.59,23.43
+Manifold Kernel + X Average,17.76,92.86,25.04
+Manifold Kernel + X Kernel,17.64,92.83,24.95
+Lasso: Manifold + X,28.73,96.59,23.65
+Lasso: Manifold + X Average,35.18,93.11,23.66
+Lasso: Manifold + X Kernel,32.91,92.77,23.73
+Lasso: Manifold Average + X,28.14,96.98,23.08
+Lasso: Manifold Average + X Average,25.09,94.62,23.42
+Lasso: Manifold Average + X Kernel,22.06,94.36,23.35
+Lasso: Manifold Kernel + X,28.96,97.52,23.05
+Lasso: Manifold Kernel + X Average,24.94,94.67,23.38
+Lasso: Manifold Kernel + X Kernel,21.74,94.32,23.34

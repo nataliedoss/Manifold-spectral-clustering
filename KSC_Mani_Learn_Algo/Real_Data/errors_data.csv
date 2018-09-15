@@ -1,0 +1,20 @@
+Algorithm,MNIST,Newsgroups
+SC,1405.0,411.0
+Manifold + X,1039.0,381.0
+Manifold + X Average,977.0,378.0
+Manifold + X Kernel,945.0,381.0
+Manifold Average + X,1327.0,404.0
+Manifold Average + X Average,1157.0,380.0
+Manifold Average + X Kernel,1134.0,367.0
+Manifold Kernel + X,1352.0,393.0
+Manifold Kernel + X Average,1173.0,376.0
+Manifold Kernel + X Kernel,1152.0,363.0
+Lasso: Manifold + X,1046.0,377.0
+Lasso: Manifold + X Average,967.0,377.0
+Lasso: Manifold + X Kernel,934.0,377.0
+Lasso: Manifold Average + X,1329.0,377.0
+Lasso: Manifold Average + X Average,1158.0,377.0
+Lasso: Manifold Average + X Kernel,1140.0,377.0
+Lasso: Manifold Kernel + X,1359.0,377.0
+Lasso: Manifold Kernel + X Average,1172.0,377.0
+Lasso: Manifold Kernel + X Kernel,1154.0,377.0
