@@ -1,12 +1,10 @@
 # Refinement Clustering Algorithm Functions
 
 import numpy as np
-import random
-import sklearn.cluster
+import sklearn
 from sklearn.cluster import KMeans
 from sklearn.neighbors import NearestNeighbors
 import itertools # For permutations
-rng = np.random.RandomState(0) # Random number generator
 
 
 
