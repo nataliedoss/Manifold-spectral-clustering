@@ -1,34 +1,13 @@
 ################################################################################
-################################################################################
-################################################################################
 # Create the manifolds for the simulations:
 
-
-#################################################################################
-#################################################################################
-#################################################################################
 # Modules
 import numpy as np
 import random
-# Plotting
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-# sklearn. Maybe do import sklearn * or something?
-import sklearn.cluster
-from sklearn.neighbors import NearestNeighbors
-from sklearn.linear_model import LogisticRegression
-# From scipy for kmeans:
-import scipy
-from scipy import cluster
-# Other
-import itertools # For permutations
-import csv # To make csv's
-import time # To time things
-rng = np.random.RandomState(0) # Random number generator
+rng = np.random.RandomState(0)
 
 
-#################################################################################
-#################################################################################
+
 #################################################################################
 
 # Circles:
@@ -55,10 +34,6 @@ def create_curves(n, k, m, d, b, n_turns, sigma):
         t = rng.uniform(0, b, len(sigma[sigma==l]))
         manifolds[sigma == l, 0] = t
         manifolds[sigma == l, 1] = np.cos(t*2) + r[l]
-    # The final curve:
-    #t = rng.uniform(0, b, len(sigma[sigma==k-1]))
-    #manifolds[sigma==k-1, 0] = np.sin(t*2) + (1.5*d)
-    #manifolds[sigma==k-1, 1] = t 
     return manifolds
 
 # Rainbow:
@@ -98,7 +73,6 @@ def create_swiss_rolls(n, k, m, d, b, n_turns, sigma):
         t = rng.uniform(0, 1, len(sigma[sigma==l])) 
         manifolds[sigma == l, 0] = r[l] * t * np.cos(t * max_rot) 
         manifolds[sigma == l, 1] = r[l] * t * np.sin(t * max_rot) 
-        #manifolds[sigma == l, 2] = rng.uniform(-1, 1, (n/k))
     return manifolds
 
 
