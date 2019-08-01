@@ -3,6 +3,12 @@
 This is a Python3 implementation of the algorithm in Kernel Spectral Clustering: Improved Bounds and Refinement.
 
 
+## External Dependencies:
+[Numpy](http://numpy.org/)
+
+[Sklearn] (https://scikit-learn.org/stable/)
+
+
 ## Example:
 
 ```
