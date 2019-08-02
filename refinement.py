@@ -1,4 +1,4 @@
-# Refinement Clustering Algorithm Functions
+# Refinement Clustering Algorithm 
 
 import numpy as np
 import sklearn
@@ -7,9 +7,6 @@ from sklearn.neighbors import NearestNeighbors
 import itertools # For permutations
 
 
-
-
-# Return the permutation of sigma_est that's closest to sigma:
 def perm_true(sigma, sigma_est, n, k, perms):
     sigma_est_perms = np.empty((len(perms), n))
     for i in range(0, len(perms)):
@@ -25,10 +22,10 @@ def perm_true(sigma, sigma_est, n, k, perms):
     return sigma_est_perms[loc_min_error,]
 
 
-
-
-
 class Mani_Cluster:
+    '''
+    class for manifold clustering algorithm
+    '''
 
     
     def __init__(self, m, k, rho, nc,
@@ -36,6 +33,16 @@ class Mani_Cluster:
                  nb_size_X, coeff_X_new,
                  K):
         '''
+        Args:
+        m: Int. Estimated manifold dimension.
+        k: Int. Estimated number of clusters.
+        rho: Float. Bandwidth used in forming Gaussian kernel in adjacency matrix.
+        nc: Int. Number of clusters used in local linear projection.
+        nb_size_mani: Int. Neighborhood size used in nearest neighbor manifold estimation. 
+        coeff_mani_est: Array(float, n x n). Used to form weighted average in nearest neighbor manifold estimation. 
+        nb_size_X: Int. Neighborhood size used to form new, local-average versions of data X. 
+        coeff_X_new: Array(float, n x n). Used to form weighted average if we choose to form new, local-averages versions of data X. 
+        K: Int. Number of neighbors to use in refinement testing.
         '''
         
         self.m = m
@@ -51,6 +58,11 @@ class Mani_Cluster:
 
     def create_adjacency_matrix(self, X):
         '''
+        Args:
+        X: Array(float, n x p). Signal (manifold) + noise data used to create kernel adjacency matrix.
+
+        Returns:
+        Array(float, n x n). Kernel adjacency matrix; kernel is the Gaussian kernel.
         '''
             
         n = X.shape[0]
@@ -68,6 +80,13 @@ class Mani_Cluster:
 
     def lra(self, X):
         '''
+        Method to compute m-rank approximation of X.
+
+        Args:
+        X: Array(float, n_sub x p). n_sub is size of dataset we wish to do linear projection on.
+
+        Returns:
+        Array(float, b_sub x p). Low rank approximation of X. 
         '''
             
         U, D, V = np.linalg.svd(X, full_matrices=True)
@@ -79,8 +98,16 @@ class Mani_Cluster:
 
     def reduce_dimension_llp(self, X, sigma_tilde):
         '''
-        '''
+        Method to locally project data (project subsets of data) to nearest linear subspace of R^p.
 
+        Args:
+        X: Array(float, n x p). Signal (manifold) + noise data.
+        sigma_tilde: Array(int, n x 1). 
+
+        Returns:
+        Array(float, n x p). Dimension-reduced points.
+        '''
+        
         n = X.shape[0]
         p = X.shape[1]
         all_manifolds_est = np.zeros((n,p))
@@ -105,6 +132,13 @@ class Mani_Cluster:
 
     def estimate_manifold_avg(self, X, sigma_tilde):
         '''
+        Method to estimate manifold using locally projected data and local averaging.
+
+        Args:
+        X: Array(float, n x p). Dimension reduced points.
+
+        Returns:
+        Array(float, n x p). Estimated manifold points.
         '''
         
         n = X.shape[0]
@@ -124,6 +158,16 @@ class Mani_Cluster:
 
 
     def create_X_new(self, X):
+        '''
+        Method to create new versions of full (not dimension reduced) data.
+
+        Args:
+        X: Array(float, n x p). Signal (manifold) + noise data.
+
+        Returns:
+        Array(float, n x p). Locally averaged versions of X. 
+        '''
+        
         n = X.shape[0]
         p = X.shape[1]
         X_new = np.zeros((n,p))
@@ -136,7 +180,16 @@ class Mani_Cluster:
 
     def test(self, X, mani_est, sigma_centers):
         '''
-        sigma_centers must match mani_est.
+        Method to assign cluster label based on nearest manifold point.
+        Sigma_centers must match mani_est.
+
+        Args:
+        X: Array(float, n x p). Signal (manifold) + noise data. 
+        mani_est: Array(float, n x p). Estimated manifold points. 
+        sigma_centers: Array(int, n x 1). Cluster assignments of manifold points. 
+
+        Returns:
+        Array(int, n x 1). Estimated cluster assignment.
         '''
         
         n = X.shape[0]
@@ -161,7 +214,19 @@ class Mani_Cluster:
         
     def refine(self, X, sigma, sigma_tilde, perms):
         '''
+        Method to estimate manifold and perform testing to obtain improved estimate of cluster assignment.
+        Requires the true sigma in order to obtain 
+        
+        Args:
+        X: Array(float, n x p). Signal (manifold) + noise data. 
+        sigma: Array(int, n x 1). True cluster assignment. 
+        sigma_tilde: Array(int, n x 1). Initial cluster assignment (e.g., after spectral clustering). 
+        perms: Array(int, (k!) x k). All permutations of sigma. 
+        
+        Returns:
+        Array(int, n x 1). Estimated cluster assignment after refinement (best permutation). 
         '''
+        
         n = X.shape[0]
         X_dr = self.reduce_dimension_llp(X, sigma_tilde)
         mani_est = self.estimate_manifold_avg(X_dr, sigma_tilde)
@@ -172,7 +237,16 @@ class Mani_Cluster:
 
     def initialize_and_refine(self, X, sigma, perms):
         '''
+        Args:
+        X: Array(float, n x p). Signal (manifold) + noise data.
+        sigma: Array(int, n x 1). True cluster assignment. 
+        perms: Array(int, (k!) x k). All permutations of sigma. 
+
+        Returns:
+        sigma_tilde_final: Array(int, n x 1). Estimated cluster assignment after initialization via spectral clustering.
+        sigma_hat_dr: Array(int, n x 1). Estimated cluster assignment after refinement algorithm. 
         '''
+        
         n = X.shape[0]
         A = self.create_adjacency_matrix(X)
         A[np.where(np.isnan(A))] = 0
