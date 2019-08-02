@@ -1,11 +1,9 @@
 ################################################################################
-################################################################################
-################################################################################
 # Simulations for algorithm
 
 # Modules
 import matplotlib.pyplot as plt
-import time # To time things
+import time 
 from refinement import * 
 from create_sim_data import * 
 
@@ -17,6 +15,7 @@ p = 20
 epsilon = 1.0 
 sigma = np.repeat(np.arange(0,k), [n/k]*k)
 perms = np.array(list(itertools.permutations(range(k))))
+
 
 # Manifold generation parameters
 m_create = 2  # Full manifold dimension
@@ -31,8 +30,8 @@ m = 2
 nb_size_mani = np.repeat(1, k)
 nb_size_X = 10
 K = 10 
-coeff_mani_est = np.repeat(1,n**2).reshape(n, n)
-coeff_X_new = np.repeat(1,n**2).reshape(n, n)
+coeff_mani_est = np.repeat(1, n**2).reshape(n, n)
+coeff_X_new = np.repeat(1, n**2).reshape(n, n)
 
 
 
