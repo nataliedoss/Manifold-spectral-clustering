@@ -1,6 +1,6 @@
 # Manifold spectral clustering
 
-This is a Python3 implementation of the algorithm in <a href="https://github.com/nataliedoss/Thesis/blob/master/main.pdf" download>Chapter 4: Mixtures of manifolds: kernel spectral clustering and refinement.
+This is a Python3 implementation of the algorithm in <a href="https://github.com/nataliedoss/Thesis/blob/master/main.pdf" download>Chapter 3: Mixtures of manifolds: kernel spectral clustering and refinement.
 
 
 ## External Dependencies:
